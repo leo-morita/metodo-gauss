@@ -1,5 +1,7 @@
 package br.com.calculoNumerico.gauss.view;
 
+import br.com.calculoNumerico.gauss.model.GaussModel;
+
 import java.util.Scanner;
 
 public class Main {
