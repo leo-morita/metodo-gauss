@@ -2,18 +2,18 @@ package br.com.calculoNumerico.gauss.model;
 
 public class GaussModel {
 
-    private int[][] matriz;
+    private String[][] matriz;
 
     public GaussModel(int ordemNaMatriz) {
-        if (ordemNaMatriz > 10 || ordemNaMatriz < 2) {
+        if (ordemNaMatriz < 2 || ordemNaMatriz > 10) {
             System.out.println("Erro! O valor está inválido. O valor permitido tem que estar entre 2 até 10");
             return;
         }
 
-        matriz = new int[ordemNaMatriz][ordemNaMatriz];
+        matriz = new String[ordemNaMatriz][ordemNaMatriz];
     }
 
-    public int[][] getMatriz() {
+    public String[][] getMatriz() {
         return matriz;
     }
 
@@ -22,9 +22,9 @@ public class GaussModel {
             System.out.print("| ");
             for (int coluna = 0; coluna < matriz[0].length; coluna++) {
                 if (coluna == matriz[0].length-1) {
-                    System.out.printf("%d |", matriz[linha][coluna]);
+                    System.out.printf("%s |", matriz[linha][coluna]);
                 } else {
-                    System.out.printf("%d ", matriz[linha][coluna]);
+                    System.out.printf("%s ", matriz[linha][coluna]);
                 }
             }
             System.out.println();
