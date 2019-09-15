@@ -17,4 +17,18 @@ public class GaussModel {
         return matriz;
     }
 
+    public void imprimirMatriz() {
+        for (int linha = 0; linha < matriz.length; linha++) {
+            System.out.print("| ");
+            for (int coluna = 0; coluna < matriz[0].length; coluna++) {
+                if (coluna == matriz[0].length-1) {
+                    System.out.printf("%d |", matriz[linha][coluna]);
+                } else {
+                    System.out.printf("%d ", matriz[linha][coluna]);
+                }
+            }
+            System.out.println();
+        }
+    }
+
 }

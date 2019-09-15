@@ -1,5 +1,6 @@
 package br.com.calculoNumerico.gauss.view;
 
+import br.com.calculoNumerico.gauss.controller.GaussController;
 import br.com.calculoNumerico.gauss.model.GaussModel;
 
 import java.util.Scanner;
@@ -14,10 +15,10 @@ public class Main {
         teclado.nextLine();
 
         GaussModel gaussModel = new GaussModel(n);
+        GaussController gaussController = new GaussController();
 
-        int[][] matriz = gaussModel.getMatriz();
-
-        System.out.println("Tamanho da matriz: " + matriz.length);
+        gaussController.adicionarValores(gaussModel.getMatriz());
+        gaussModel.imprimirMatriz();
     }
 
 }
