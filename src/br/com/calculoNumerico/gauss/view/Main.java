@@ -18,7 +18,8 @@ public class Main {
         GaussController gaussController = new GaussController();
 
         gaussController.adicionarValores(gaussModel.getMatriz());
-        gaussModel.imprimirMatriz();
+//        gaussModel.imprimirMatriz();
+        gaussController.escalonar(gaussModel.getMatriz());
     }
 
 }
