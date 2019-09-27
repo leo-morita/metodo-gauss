@@ -1,4 +1,4 @@
-package br.com.calculoNumerico.gauss.view;
+
 
 public class Main {
 
@@ -71,18 +71,15 @@ public class Main {
                 }
             }
             int indice;
-            for (int i = 0; i < A.length; i++) {
+            /*for (int i = 0; i < A.length; i++) {
                 indice = i + 1;
                 if (i == A.length-1) {
                     System.out.printf("%-12s", "x" + indice);
                     System.out.printf("|%-12s%n", "b");
-                /*System.out.println("Teste: " + "x" + i);
-                System.out.println("Teste: " + "| b");*/
                 } else {
                     System.out.printf("%-12s", "x" + indice);
-//                System.out.println("Teste: " + "x" + i);
                 }
-            }
+            }*/
 
             for (int i = 0; i < A.length; i++) {
                 for (int j = 0; j < A[i].length; j++) {

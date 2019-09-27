@@ -5,6 +5,8 @@
  */
 
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import javafx.scene.control.TableColumn;
 
 /**
@@ -29,11 +31,16 @@ public class Tela extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         valorN = new javax.swing.JTextField();
         jToggleButton1 = new javax.swing.JToggleButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        Resultado = new javax.swing.JTextArea();
+
+        jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Método de Gauss");
@@ -68,10 +75,14 @@ public class Tela extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "x1", "x2", "x3", "x4", "x5", "x6", "x7", "x8", "x9", "x10", "X"
+                "x1", "x2", "x3", "x4", "x5", "x6", "x7", "x8", "x9", "x10", "B"
             }
         ));
         jScrollPane1.setViewportView(tabela);
+
+        Resultado.setColumns(20);
+        Resultado.setRows(5);
+        jScrollPane2.setViewportView(Resultado);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -87,7 +98,9 @@ public class Tela extends javax.swing.JFrame {
                 .addContainerGap(491, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -100,7 +113,9 @@ public class Tela extends javax.swing.JFrame {
                     .addComponent(jToggleButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(245, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -113,18 +128,39 @@ public class Tela extends javax.swing.JFrame {
         int n = Integer.parseInt(valorN.getText());
         dados = new Object[n][n];
         //dados[0][0] = tabela.getValueAt(0,0);
+        Main m;
         for(int x = 0; x < n;x++){
             for (int y = 0;y< n;y++){
                 dados[x][y] = tabela.getValueAt(x,y);
-                System.out.println(tabela.getValueAt(x,y).toString());
+                //System.out.println(tabela.getValueAt(x,y).toString());
+            }
+        }
+        double[][] aux = new double[n][n];
+        double[] r = new double[n];
+        for(int x = 0; x < n;x++){
+            for (int y = 0;y< n;y++){
+                aux[x][y] = Double.parseDouble(dados[x][y].toString());
             }
         }
         
-        for(int x = 0; x < n;x++){
-            for (int y = 0;y< n;y++){
-                System.out.println("objeto "+dados[x][y].toString());
-            }
-        }       
+        for(int x = 0;x < n;x++){
+            //System.out.println(tabela.getValueAt(x,10).toString());
+            r[x] =  Double.parseDouble(tabela.getValueAt(x,10).toString());
+        }
+            
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(baos);
+            // IMPORTANT: Save the old System.out!
+        PrintStream old = System.out;
+        // Tell Java to use your special stream
+        System.setOut(ps);
+        // Print some output: goes to your special stream
+        m = new Main(n,aux,r);
+        // Put things back
+        System.out.flush();
+        System.setOut(old);
+        Resultado.setText(baos.toString());
+        
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     
@@ -171,8 +207,11 @@ public class Tela extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea Resultado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JTable tabela;
     private javax.swing.JTextField valorN;
