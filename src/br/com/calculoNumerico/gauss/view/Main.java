@@ -4,6 +4,23 @@ public class Main {
 
     private static final double nuloNum = 1e-5;
 
+    public Main(int tamanhoM, double[][] m, double[] ig){
+        int TamanhoMatriz = tamanhoM;
+        double[][] A = m;
+
+        double[] igual = ig;
+
+        double[] x = LinearS(A, igual);
+        int num = 1;
+
+        for (int i = 0; i < TamanhoMatriz; i++) {
+            System.out.printf("x" + num + " = ");
+            System.out.printf("%.4f ", x[i]);
+            System.out.printf("\n");
+            num++;
+        }
+    }
+
     public static void main(String[] args) {
         int TamanhoMatriz = 4;
         double[][] A = {
