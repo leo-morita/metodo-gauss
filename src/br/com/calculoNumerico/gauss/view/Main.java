@@ -30,6 +30,7 @@ public class Main {
         int n = b.length;
 
         for (int p = 0; p < n; p++) {
+            System.out.println("K = " + p);
 
             // Encontra a coluna Pivô e substitui
             int max = p;
@@ -52,12 +53,26 @@ public class Main {
                     A[i][j] -= alpha * A[p][j];
                 }
             }
+            int indice;
+            for (int i = 0; i < A.length; i++) {
+                indice = i + 1;
+                if (i == A.length-1) {
+                    System.out.printf("%-12s", "x" + indice);
+                    System.out.printf("|%-12s%n", "b");
+                /*System.out.println("Teste: " + "x" + i);
+                System.out.println("Teste: " + "| b");*/
+                } else {
+                    System.out.printf("%-12s", "x" + indice);
+//                System.out.println("Teste: " + "x" + i);
+                }
+            }
 
             for (int i = 0; i < A.length; i++) {
                 for (int j = 0; j < A[i].length; j++) {
                     if (j == A[i].length-1) {
 //                    System.out.printf("%-12d%-12d%d\n",15,12,5);
-                        System.out.printf("|%-12f%n", A[i][j]);
+                        System.out.printf("%-12f", A[i][j]);
+                        System.out.printf("|%-12f%n", b[i]);
 //                    System.out.print(a[i][j] + "|\t");
                     } else {
                         System.out.printf("%-12f", A[i][j]);
