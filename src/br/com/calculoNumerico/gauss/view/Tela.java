@@ -1,4 +1,4 @@
-/*
+package br.com.calculoNumerico.gauss.view;/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -8,6 +8,7 @@
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import javafx.scene.control.TableColumn;
+import br.com.calculoNumerico.gauss.view.Main;
 
 /**
  *
