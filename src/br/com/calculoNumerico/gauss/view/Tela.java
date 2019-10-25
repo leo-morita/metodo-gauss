@@ -1,4 +1,6 @@
 package br.com.calculoNumerico.gauss.view;/*
+
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -8,7 +10,6 @@ package br.com.calculoNumerico.gauss.view;/*
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import javafx.scene.control.TableColumn;
-import br.com.calculoNumerico.gauss.view.Main;
 
 /**
  *
@@ -21,6 +22,7 @@ public class Tela extends javax.swing.JFrame {
      */
     public Tela() {
         initComponents();
+        jButton2.disable();
     }
 
     /**
@@ -40,6 +42,10 @@ public class Tela extends javax.swing.JFrame {
         tabela = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         Resultado = new javax.swing.JTextArea();
+        jButton2 = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        RL = new javax.swing.JTextArea();
+        jLabel2 = new javax.swing.JLabel();
 
         jTextField1.setText("jTextField1");
 
@@ -85,24 +91,44 @@ public class Tela extends javax.swing.JFrame {
         Resultado.setRows(5);
         jScrollPane2.setViewportView(Resultado);
 
+        jButton2.setText("LU");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        RL.setColumns(20);
+        RL.setRows(5);
+        jScrollPane3.setViewportView(RL);
+
+        jLabel2.setText("LU");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(valorN, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jToggleButton1)
-                .addContainerGap(491, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addContainerGap(45, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton2)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE)
                     .addComponent(jScrollPane2)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(jScrollPane3))
+                .addGap(24, 24, 24))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(valorN, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jToggleButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(jLabel2)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,7 +141,13 @@ public class Tela extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(jButton2)
                 .addContainerGap())
         );
 
@@ -157,11 +189,11 @@ public class Tela extends javax.swing.JFrame {
         System.setOut(ps);
         // Print some output: goes to your special stream
         m = new Main(n,aux,r);
+        //lu(n,aux);
         // Put things back
         System.out.flush();
         System.setOut(old);
-        Resultado.setText(baos.toString());
-        
+        Resultado.setText(baos.toString());  
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     
@@ -170,6 +202,104 @@ public class Tela extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_valorNActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        int n = Integer.parseInt(valorN.getText());
+        dados = new Object[n][n];
+        //dados[0][0] = tabela.getValueAt(0,0);
+        //Main m;
+        for(int x = 0; x < n;x++){
+            for (int y = 0;y< n;y++){
+                dados[x][y] = tabela.getValueAt(x,y);
+                //System.out.println(tabela.getValueAt(x,y).toString());
+            }
+        }
+        double[][] aux = new double[n][n];
+        double[] r = new double[n];
+        for(int x = 0; x < n;x++){
+            for (int y = 0;y< n;y++){
+                aux[x][y] = Double.parseDouble(dados[x][y].toString());
+            }
+        }
+        
+        for(int x = 0;x < n;x++){
+            //System.out.println(tabela.getValueAt(x,10).toString());
+            r[x] =  Double.parseDouble(tabela.getValueAt(x,10).toString());
+        }
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(baos);
+            // IMPORTANT: Save the old System.out!
+        PrintStream old = System.out;
+        // Tell Java to use your special stream
+        System.setOut(ps);
+        // Print some output: goes to your special stream
+        //m = new Main(n,aux,r);
+        lu(n,aux);
+        // Put things back
+        System.out.flush();
+        System.setOut(old);
+        RL.setText(baos.toString());  
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    public void lu(int n, double[][] m){
+        double[][]L = new double[n][n]; 
+        double[][]U = new double[n][n]; 
+        double[][]LU = new double[n][n]; 
+    for (int i = 0; i < n; i++) { 
+        // Decomposição U
+        for (int k = i; k < n; k++) { 
+            double soma = 0; 
+            for (int j = 0; j < i; j++) 
+                soma += (L[i][j] * U[j][k]); 
+            // Evaluating U(i, k) 
+            U[i][k] = m[i][k] - soma; 
+        } 
+        // Decomposição L
+        for (int k = i; k < n; k++)  { 
+            if (i == k) 
+                L[i][i] = 1;
+            else{
+                double soma = 0; 
+                for (int j = 0; j < i; j++) 
+                    soma += (L[k][j] * U[j][i]); 
+                L[k][i] = (m[k][i] - soma) / U[i][i]; 
+            } 
+        }        
+    } 
+        
+        System.out.println("L");
+        for(int i = 0; i < n;i++){
+            for(int j =0; j < n;j++){
+                System.out.print(L[i][j]+" ");
+            }
+            System.out.println("");
+        }
+        System.out.println("");
+        System.out.println("U");
+        for(int i = 0; i < n;i++){
+            for(int j =0; j < n;j++){
+                System.out.print(U[i][j]+" ");
+            }
+            System.out.println("");
+        }
+        System.out.println("");
+        //Multiplicação de matriz
+        System.out.println("L*U");
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                for (int x = 0; x < n; x++) {
+                    LU[i][j] += L[i][x] * U[x][j];
+                }
+            }
+        }
+        for(int i = 0; i < n;i++){
+            for(int j =0; j < n;j++){
+                System.out.print(LU[i][j]+" ");
+            }
+            System.out.println("");
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -203,15 +333,20 @@ public class Tela extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Tela().setVisible(true);
+                
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea RL;
     private javax.swing.JTextArea Resultado;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JTable tabela;
