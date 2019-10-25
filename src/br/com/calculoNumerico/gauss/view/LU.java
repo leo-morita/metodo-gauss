@@ -3,70 +3,63 @@ package br.com.calculoNumerico.gauss.view;
 import br.com.calculoNumerico.gauss.model.Pivo;
 
 public class LU {
-
-    private int i, j, k, qtdLinhas, qtdColunas;
-
-    public double[] resolve(double a[][], double b[]) {
-
-        qtdLinhas = a.length;
-        qtdColunas = a[0].length;
-
-        // A matriz a[][] é sobrescrita em uma que contém as matrizes diagonais
-        // inferioras e superioras.
-
-        for (j = 0; j < qtdColunas; ++j) {
-
-            // Elementos diagonais superiores.
-
-            for (i = 0; i <= j; ++i) {
-                for (k = 0; k < i; ++k) {
-                    a[i][j] -= a[i][k] * a[k][j];
+    public void getLU(int n, double[][] m){
+        double[][]L = new double[n][n]; 
+        double[][]U = new double[n][n]; 
+        double[][]LU = new double[n][n]; 
+    for (int i = 0; i < n; i++) { 
+        // Decomposição U
+        for (int k = i; k < n; k++) { 
+            double soma = 0; 
+            for (int j = 0; j < i; j++) 
+                soma += (L[i][j] * U[j][k]); 
+            // Evaluating U(i, k) 
+            U[i][k] = m[i][k] - soma; 
+        } 
+        // Decomposição L
+        for (int k = i; k < n; k++)  { 
+            if (i == k) 
+                L[i][i] = 1;
+            else{
+                double soma = 0; 
+                for (int j = 0; j < i; j++) 
+                    soma += (L[k][j] * U[j][i]); 
+                L[k][i] = (m[k][i] - soma) / U[i][i]; 
+            } 
+        }        
+    } 
+        
+        System.out.println("L");
+        for(int i = 0; i < n;i++){
+            for(int j =0; j < n;j++){
+                System.out.print(L[i][j]+" ");
+            }
+            System.out.println("");
+        }
+        System.out.println("");
+        System.out.println("U");
+        for(int i = 0; i < n;i++){
+            for(int j =0; j < n;j++){
+                System.out.print(U[i][j]+" ");
+            }
+            System.out.println("");
+        }
+        System.out.println("");
+        //Multiplicação de matriz
+        System.out.println("L*U");
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                for (int x = 0; x < n; x++) {
+                    LU[i][j] += L[i][x] * U[x][j];
                 }
             }
-
-            // Elementos diagonais inferiores.
-
-            for (i = j + 1; i < qtdLinhas; ++i) {
-                for (k = 0; k < j; ++k) {
-                    a[i][j] -= a[i][k] * a[k][j];
-                }
-            }
-
-            // Determinar o elemento pivô para a coluna atual e reorganizar as
-            // linhas.
-
-            Pivo pivo = new Pivo();
-            pivo.pivoParcial(a, b);
-
-            // Divide os elementos diagonais inferiores pelo valor diagonal.
-
-            for (i = j + 1; i < qtdLinhas; ++i) {
-                a[i][j] /= a[j][j];
-            }
-
-        } // fim do carregamento da matriz LU.
-
-        // Usa a substituição forward (para frente) and backward (para trás)
-        // para resolver as incógnitas.
-        // Primeiro a substituição forward.
-
-        for (i = 1; i < qtdLinhas; ++i) {
-            for (j = 0; j < i; ++j) {
-                b[i] -= a[i][j] * b[j];
-            }
         }
-
-        // E agora a substituição backward
-
-        b[qtdLinhas - 1] = b[qtdLinhas - 1] / a[qtdLinhas - 1][qtdLinhas - 1];
-        for (i = qtdLinhas - 2; i >= 0; --i) {
-            for (j = i + 1; j < qtdColunas; ++j) {
-                b[i] -= a[i][j] * b[j];
+        for(int i = 0; i < n;i++){
+            for(int j =0; j < n;j++){
+                System.out.print(LU[i][j]+" ");
             }
-            b[i] /= a[i][i];
+            System.out.println("");
         }
-
-        return b;
     }
 }
 
