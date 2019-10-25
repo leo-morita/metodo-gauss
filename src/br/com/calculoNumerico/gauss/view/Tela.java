@@ -250,8 +250,7 @@ public class Tela extends javax.swing.JFrame {
         for (int k = i; k < n; k++) { 
             double soma = 0; 
             for (int j = 0; j < i; j++) 
-                soma += (L[i][j] * U[j][k]); 
-            // Evaluating U(i, k) 
+                soma += (L[i][j] * U[j][k]);
             U[i][k] = m[i][k] - soma; 
         } 
         // Decomposição L
